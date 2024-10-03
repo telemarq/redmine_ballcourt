@@ -32,7 +32,7 @@ but you will need to set up a configuration file before it can actually do anyth
 
 The script uses the excellent [Dynaconf](https://dynaconf.com/) library to manage configuration. This means that you can set up your configuration in a variety of ways, but here's a suggestion:
 
-There is a file called `[ballcourt.toml](ballcourt.toml)` in the root of this repository.  This shows a set of example configuration settings.  You can either modify a copy of this file and place it in your current working directory, or you can use it as a basis and override the settings in a file of your own.  
+There is a file called [ballcourt.toml](ballcourt.toml) in the root of this repository.  This shows a set of example configuration settings.  You can either modify a copy of this file and place it in your current working directory, or you can use it as a basis and override the settings in a file of your own.  
 
 At present, the script will look for:
 * `/etc/ballcourt.toml`

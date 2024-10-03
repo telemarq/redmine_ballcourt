@@ -49,8 +49,6 @@ html_report_template = """
     <h1>Assignment Report for {{ settings.server_name}}</h1>
     <p>Dear {{ user.firstname }},</p>
     
-    <p><i>(This is Quentin testing the first version of his cunning new script that he may eventually schedule to run periodically, perhaps once a fortnight. Feedback welcome!)</i></p>
-
     <p>These open issues are assigned explicitly to you on <a href="{{settings.url}}">{{settings.server_name}}</a>.
     The ball is therefore in your court for these, and other people are unlikely to work on them
     while they are assigned to you.  </p>
