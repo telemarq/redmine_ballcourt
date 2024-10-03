@@ -1,0 +1,85 @@
+# Here's an example of a settings file.
+# You should override the values with your own.
+# possibly in .secrets.toml
+# or in environment variables named, e.g., BALLCOURT_URL, BALLCOURT_KEY
+# Any .env file is also read automatically for environment variables.
+# See https://dynaconf.com for more information on the config-processing.
+
+url = "https://redmine.example.com"
+key = "your API key for your redmine server"
+server_name = "the company Redmine System"
+smtp_server = "smtp.example.com"
+smtp_port = 587
+smtp_user = "kermit"
+smtp_password = "grenouille"
+smtp_from = "services@mycompany.com"
+
+subject_template = "Assignment report for {{user}} on {{ settings.server_name}}"
+
+text_report_template = """
+Assignment Report for {{ settings.server_name }}
+
+I'm sorry, you need an HTML-capable email client to read this report.
+"""
+
+html_report_template = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redmine Ballcourt Report</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assignment Report for {{ settings.server_name}}</h1>
+    <p>Dear {{ user.firstname }},</p>
+    
+    <p><i>(This is Quentin testing the first version of his cunning new script that he may eventually schedule to run periodically, perhaps once a fortnight. Feedback welcome!)</i></p>
+
+    <p>These open issues are assigned explicitly to you on <a href="{{settings.url}}">{{settings.server_name}}</a>.
+    The ball is therefore in your court for these, and other people are unlikely to work on them
+    while they are assigned to you.  </p>
+    <p>If you don't think any aspect of this situation is desirable, please follow the links and edit the tickets accordingly!</p>
+
+    {% for project, p_issues in issues|groupby("project.name") %}
+    <h2>{{ project }}</h2>
+    <table>
+
+        <tr>
+            <th>Issue</th>
+            <th>Project</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Subject</th>
+            <th>Updated</th>
+        </tr>
+        {% for issue in p_issues %}
+        <tr>
+            <td><a href="{{settings.url}}/issues/{{issue.id}}/">{{ issue.id }}</a></td>
+            <td>{{ issue.project.name }}</td>
+            <td>{{ issue.priority }}</td>
+            <td>{{ issue.status }}</td>
+            <td>{{ issue.subject }}</td>
+            <td>{{ issue.updated_on }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endfor %}
+</body>
+</html>
+"""
