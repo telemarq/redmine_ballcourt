@@ -46,6 +46,8 @@ A `.env` file in the current working directory can also be used to set environme
 
 The sample `ballcourt.toml` will show you most of the configuration options you can set.  These include the templates for the HTML and text emails that will be sent, which are templated using [Jinja](https://jinja.palletsprojects.com/en/).
 
+If you want to change the location of the configuration files, the easiest way at present is to use the environment variables `SETTINGS_FILE_FOR_DYNACONF` or `SETTINGS_FILES_FOR_DYNACONF`.  See the [Dynaconf documentation](https://dynaconf.com/) for more details.
+
 ## Usage
 
 You can test the script by running it with the `-l` flag, which will simply list the Projects in your Redmine system.  If this works, then you've set your URL and API key correctly.
