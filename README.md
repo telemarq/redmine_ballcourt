@@ -62,9 +62,9 @@ So you probably want to restrict this while testing.
 
 Firstly, you can restrict the users or projects that are considered by specifying them in the settings.  For example, you could set `include_users = ["my_username"]` .
 
-Secondly, you can use the `-d` flag to specify a debug email address, and the messages will all be sent to that address instead of to the users concerned.  So to see the messages that would be sent to user1 and user2, you could run:
+Secondly, you can use the `-d` flag to specify a debug email address, and the messages will all be sent to that address instead of to the users concerned.  So to see the messages that would be sent to user1 and user2, you could specify them in the `include_users` setting in your configuration file and then run:
 
-`redmine-ballcourt -d myemail@example.com username1 username2`
+`redmine-ballcourt -d myemail@example.com`
 
 Thirdly, you can use the `-n` flag to specify a dry run, which will print the emails to the console instead of sending them.
 

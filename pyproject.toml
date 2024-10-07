@@ -12,6 +12,9 @@ authors = [
 [project.scripts]
 redmine-ballcourt = "redmine_ballcourt:main"
 
+[project.urls]
+Homepage = "https://github.com/telemarq/redmine_ballcourt"
+Issues = "https://github.com/telemarq/redmine_ballcourt/issues"
 
 [build-system]
 requires = ["hatchling"]
