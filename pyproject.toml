@@ -1,6 +1,6 @@
 [project]
 name = "redmine_ballcourt"
-version = "0.1.0"
+version = "0.2.0"
 description = "The ball's in your court! Which Redmine tickets are explicitly assigned to you?"
 readme = "README.md"
 requires-python = ">=3.10"

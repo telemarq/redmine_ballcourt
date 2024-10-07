@@ -8,11 +8,28 @@
 url = "https://redmine.example.com"
 key = "your API key for your redmine server"
 server_name = "the company Redmine System"
+
+# By default, all users of the system will be included in the reports.
+# You can limit the users to be included by listing their usernames here.
+# include_users = [ "kermit", "misspiggy" ]
+# You can also exclude users by listing their usernames here.
+# exclude_users = [ "gonzo" ]
+
+# Similarly, by default all projects will be included in the reports.
+# You can limit the projects to be included by listing their identifiers here.
+# include_projects = [ "muppet-client", "muppet-video" ]
+# You can also exclude projects by listing their identifiers here.
+# exclude_projects = [ "muppet-news" ]
+
+# The following are the settings for the SMTP server that will send the email.
+
 smtp_server = "smtp.example.com"
 smtp_port = 587
 smtp_user = "kermit"
 smtp_password = "grenouille"
 smtp_from = "services@mycompany.com"
+
+# And these are the format templates for the email:
 
 subject_template = "Assignment report for {{user}} on {{ settings.server_name}}"
 

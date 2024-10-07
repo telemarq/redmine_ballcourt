@@ -38,7 +38,7 @@ def main():
                         help='List users and exit - the first field gives the username that can be used to generate individual reports.')
     parser.add_argument('-n', '--dry_run', action='store_true', help='Do not send emails')
     parser.add_argument('-d', '--debug_email', metavar="ADDR", help='Send all emails to this address, instead of each user, for debugging purposes.')
-    parser.add_argument('USERNAME', nargs='*', help='Usernames of users to check')
+
     args = parser.parse_args(sys.argv[1:])
     settings.update(vars(args))
 
@@ -60,15 +60,36 @@ def main():
     text_template = jinja2.Template(settings.text_report_template)
     html_template = jinja2.Template(settings.html_report_template)
 
-    users = redmine.user.all()
-    if settings.USERNAME:
-        users = [ u for u in users if u.login in settings.USERNAME ]
+    # Let's do some filtering of users and projects
+    all_users = redmine.user.all()
+    all_projects = redmine.project.all()
+    
+    # You can specify lists of usernames in the settings file
+    # to include or exclude. The default is to include all users.
+    if 'include_users' in settings:
+        users = [ u for u in all_users if u.login in settings.include_users ]
+    else:
+        users  = all_users
+    if 'exclude_users' in settings:
+        users = [ u for u in users if u.login not in settings.exclude_users ]
+    
+    # You can specify lists of project identifiers in the settings
+    # to include or exclude. The default is to include all projects.
+    if 'include_projects' in settings:
+        projects = [ p for p in all_projects if p.identifier in settings.include_projects ]
+    else:
+        projects = all_projects
+    if 'exclude_projects' in settings:
+        projects = [ p for p in projects if p.identifier not in settings.exclude_projects ]
+    project_ids = [ p.id for p in projects ]
+
     for user in users:
         # Can't notify users without an email address
         # if user.mail is None:
         #    continue
         issues = redmine.issue.filter(assigned_to_id=user.id, status_id='open', sort='priority:desc')
-        projects = set(i.project.name for i in issues)
+        issues = [ i for i in issues if i.project.id in project_ids ]
+
         if issues:
             log.info(f"User {user.id} ({user.login} {user.mail}) has {len(issues)} open issues - generating report")
             env = {'settings': settings, 'user': user, 'issues': issues}
@@ -93,3 +114,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

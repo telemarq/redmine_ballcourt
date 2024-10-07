@@ -58,9 +58,9 @@ You can also try the `-u` flag, which will list the users.  On each line, the fi
 
 The default operation of the script, if you run it without any options, is slightly dangerous, and I admit this is perhaps a bad idea. If you've configured it correctly, it will send an email to every user in the system, listing the issues that are assigned to them.  
 
-So you probably want to restrict this while testing. Firstly, you can specify one or more usernames on the command line, and the script will only send emails to those users.  
+So you probably want to restrict this while testing. 
 
-`redmine-ballcourt username1 username2`
+Firstly, you can restrict the users or projects that are considered by specifying them in the settings.  For example, you could set `include_users = ["my_username"]` .
 
 Secondly, you can use the `-d` flag to specify a debug email address, and the messages will all be sent to that address instead of to the users concerned.  So to see the messages that would be sent to user1 and user2, you could run:
 
