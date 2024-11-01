@@ -8,31 +8,33 @@ I wrote this because I wanted to send periodic reminders out to the members of o
 
 This is a standard Python 3 package. You can install it with pip:
 
-```bash
-pip install redmine_ballcourt
-```
+    pip install redmine_ballcourt
 
-or you can clone this repository and install it with pip from this directory into whichever virtual environment you'd like to use it:
+(You may need to use `pip3` instead of `pip` depending on your system, or perhaps `python3 -m pip`. You may also need to add `--user` or install it in a virtualenv if you're on a system that doesn't make it easy to install it centrally.)
 
-```bash
-pip install .
-```
+In either case, a script called `redmine-ballcourt` should be installed in your path.
 
-In either case, a script called `redmine-ballcourt` will be installed in your path.
+Or you can clone this repository and install it with pip from this directory into whichever virtual environment you'd like to use it:
 
-You can run this script with the `--help` or `-h` flag to see the options:
+    pip install .
 
-```bash
-redmine-ballcourt -h
-```
+Finally, a more modern option is to install [uv](https://docs.astral.sh/uv/), and you can then run the script with 
 
-but you will need to set up a configuration file before it can actually do anything. The script will not run without a configuration file.
+    uv run redmine-ballcourt
+
+This will ensure that the script is run in a virtual environment with the correct dependencies, and is also very convenient if you are modifying the code yourself.
+
+However you choose to run it, you can add the `--help` or `-h` flag to see the options:
+
+    redmine-ballcourt -h
+
+but you will need to set up a configuration file before it can actually *do* anything. The script will not run without a configuration file.
 
 ## Configuration
 
 The script uses the excellent [Dynaconf](https://dynaconf.com/) library to manage configuration. This means that you can set up your configuration in a variety of ways, but here's a suggestion:
 
-There is a file called [ballcourt.toml](ballcourt.toml) in the root of this repository.  This shows a set of example configuration settings.  You can either modify a copy of this file and place it in your current working directory, or you can use it as a basis and override the settings in a file of your own.  
+There is a file called [ballcourt.toml](ballcourt.toml) in the root of this repository which shows a set of example configuration settings.  You can either modify a copy of this file and place it in your current working directory, or you can use it as a basis and override the settings in a file of your own.  
 
 At present, the script will look for:
 * `/etc/ballcourt.toml`
@@ -74,6 +76,6 @@ But when you're ready to go, you can just run the script without any options, an
 
 This software is released under the GNU Public License v2.  See the [LICENSE](LICENSE) file for details.
 
-Quentin Stafford-Fraser
-quentinsf.com
-Oct 2024
+Quentin Stafford-Fraser  
+quentinsf.com  
+Oct 2024  
